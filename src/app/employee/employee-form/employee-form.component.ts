@@ -6,7 +6,7 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -49,7 +49,7 @@ export class EmployeeFormComponent
 {
   public mode = 'ADD';
   public pageTitle = 'Create Employee';
-  public employeeForm: FormGroup;
+  public employeeForm: UntypedFormGroup;
   public imageFile: File;
   public employee: IEmployee;
   public localImagePath: any;
@@ -89,7 +89,7 @@ export class EmployeeFormComponent
 
   constructor(
     private store: Store,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private toastrService: ToastrService,
     private activatedRouter: ActivatedRoute,
     private router: Router,

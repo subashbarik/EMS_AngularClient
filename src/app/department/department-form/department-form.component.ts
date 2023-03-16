@@ -4,7 +4,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -35,7 +35,7 @@ export class DepartmentFormComponent
 {
   public mode = 'ADD';
   public pageTitle = 'Create Department';
-  public departmentForm: FormGroup;
+  public departmentForm: UntypedFormGroup;
   public department: IDepartment;
   public companyInfo: ICompany;
 
@@ -53,7 +53,7 @@ export class DepartmentFormComponent
   constructor(
     private store: Store,
     private activatedRouter: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private toastrService: ToastrService,
     private actions$: Actions,
     private router: Router

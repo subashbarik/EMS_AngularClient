@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Register } from 'src/app/shared/models/user';
@@ -15,11 +15,11 @@ import {
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-  public registerForm: FormGroup;
+  public registerForm: UntypedFormGroup;
   public errors: string[];
   public registerStatus$: Observable<string>;
   public registerError$: Observable<any>;
-  constructor(private fb: FormBuilder, private store: Store) {}
+  constructor(private fb: UntypedFormBuilder, private store: Store) {}
 
   ngOnInit(): void {
     this.createRegisterForm();
