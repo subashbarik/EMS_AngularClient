@@ -1,0 +1,303 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../node_modules/ngx-toastr/toastr.css";
+@import "./variable.scss";
+
+body {
+  //   background-color: $emsPrimaryThemeColor;
+  //background-color: rgb(217, 230, 230);
+}
+.ems-app-container {
+  width: 99vw;
+  //background-color: $emsPrimaryBodyBackGroundColor;
+}
+// Header start
+.ems-header-body {
+  //background-color: $emsPrimaryBodyBackGroundColor;
+  //background-color: var(--background);
+  //width: 97vw;
+}
+// Header ends
+
+// Side menu start
+
+.ems-side-menu-body {
+  border: 1px solid $emsPrimaryThemeColor;
+  height: 90vh;
+  //min-width: 8vh;
+  //background-color: $emsPrimaryBodyBackGroundColor;
+  margin: 0px 10px;
+  border-radius: $emsBorderRadius;
+  box-shadow: 0.1rem 0.1rem 0.2rem 0.2rem $emsShadowColor;
+}
+
+.ems-side-menu-header {
+  background-color: $emsPrimaryThemeColor;
+}
+.ems-side-menu-header:first-child {
+  border-top-left-radius: $emsBorderRadius;
+  border-top-right-radius: $emsBorderRadius;
+}
+.ems-side-menu-header-caption {
+  color: #fff;
+}
+.ems-side-menu-down-icon {
+  color: $emsDownArrowColor;
+}
+.ems-side-menu-nav-link {
+  text-decoration: none;
+  color: #000000;
+}
+.ems-side-menu-nav-link:hover {
+  font-weight: 600;
+}
+.ems-side-menu-nav-link.active {
+  color: $emsPrimaryThemeColor;
+  font-weight: 600;
+}
+// side menu end
+
+//Body start
+.ems-main-body-grid {
+  display: grid;
+  grid-template-columns: 14% 84%;
+  gap: 0px 12px;
+}
+.ems-header {
+  background-color: $emsPrimaryThemeColor;
+  color: $emsPageHeaderColor;
+  //font-size: 1rem;
+  //height: 3vh;
+  //width: 83vw;
+  border-top-left-radius: $emsBorderRadius;
+  border-top-right-radius: $emsBorderRadius;
+  box-shadow: 0.1rem 0.1rem 0.2rem 0.2rem $emsShadowColor;
+}
+.ems-body {
+  border: 1px solid $emsPrimaryThemeColor;
+  //width: 83vw;
+  height: 87vh;
+  //background-color: $emsPrimaryBodyBackGroundColor;
+  overflow: auto;
+  border-bottom-left-radius: $emsBorderRadius;
+  border-bottom-right-radius: $emsBorderRadius;
+  box-shadow: 0.1rem 0.1rem 0.2rem 0.2rem $emsShadowColor;
+}
+//body end
+
+// Footer start
+.ems-footer {
+  background-color: rgba($color: #818080, $alpha: 1);
+}
+.ems-footer-text {
+  color: #fff;
+}
+// Footer end
+
+.ems-content {
+  // min-height: 70vh;
+}
+.ems-loading {
+  //width: 83vw;
+  //height: 87vh;
+}
+.ems-report-frame-style {
+  //background-color: $emsPrimaryBodyBackGroundColor;
+}
+.ems-loading-div-style {
+  display: inline;
+  font-weight: 500;
+  height: 3rem;
+  width: 15rem;
+  align-items: center;
+  z-index: 100;
+  background-color: $emsPrimaryThemeColor;
+  color: $emsPageHeaderColor;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem $emsShadowColor;
+  padding-top: 0.5rem;
+  padding-left: 2rem;
+}
+.ems-hide-loading-div {
+  display: none;
+}
+.ems-profile-icon {
+  color: $emsPrimaryThemeColor;
+}
+.ems-logout-icon {
+  color: $emsPrimaryThemeColor;
+}
+
+.ems-table-icon,
+.ems-edit-table-icon,
+.ems-delete-table-icon {
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.ems-edit-table-icon {
+  color: $emsPrimaryThemeColor;
+}
+.ems-delete-table-icon {
+  color: $emsTableRowDeleteColor;
+}
+.ems-a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem;
+}
+.ems-a:hover {
+  color: #333;
+}
+
+.ems-login-form-div {
+  border: 1px solid $emsPrimaryThemeColor;
+  padding: 2rem;
+}
+.ems-login-form-header {
+  background-color: $emsPrimaryThemeColor;
+  color: $emsPageHeaderColor;
+  border-top-left-radius: $emsBorderRadius;
+  border-top-right-radius: $emsBorderRadius;
+}
+// employee
+.ems-employee-tab {
+  background-color: $emsTertiaryBackGroundColor;
+}
+
+// employee list page
+.ems-employee-list-grid {
+  display: grid;
+  row-gap: 1rem;
+  //column-gap: 0.2rem;
+  margin-bottom: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+.ems-employee-card {
+  min-height: 14rem;
+  background: linear-gradient(
+    to right bottom,
+    rgba(110, 146, 231, 0.35),
+    rgba(230, 125, 34, 0.35)
+  );
+  box-shadow: 0 0.6rem 0.6rem rgba(0, 0, 0, 0.075);
+  transition: all 0.4s;
+  max-width: 32rem;
+}
+.ems-employee-card:hover {
+  background-color: #656464;
+  transform: translateY(-0.3rem);
+  box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.075);
+}
+
+// employee details page
+.ems-empdetails-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr, 1fr;
+  column-gap: 1rem;
+  row-gap: 1rem;
+}
+.ems-empldetails-grid-img {
+  grid-row: 1 / span 2; //span across two rows
+}
+.ems-empdetails-cards-main-div {
+  border: 1px solid $emsPrimaryThemeColor;
+  border-top-left-radius: $emsBorderRadius;
+  border-top-right-radius: $emsBorderRadius;
+  //background-color: $emsTertiaryBackGroundColor;
+  box-shadow: 0.1rem 0.1rem 0.2rem 0.2rem $emsShadowColor;
+}
+.ems-empdetails-cards-header-div {
+  background-color: $emsPrimaryThemeColor;
+  color: $emsPageHeaderColor;
+  border-top-left-radius: $emsBorderRadius;
+  border-top-right-radius: $emsBorderRadius;
+}
+.ems-empdetails-cards-inner-div {
+  padding-left: 5px;
+}
+// theme
+.ems-theme-grey,
+.ems-theme-blue,
+.ems-theme-selected {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid black;
+  cursor: pointer;
+}
+.ems-theme-blue {
+  // for some reason this color is not applied in the theme
+  // box in the header
+  background-color: $emsPrimaryBodyBackGroundColor;
+}
+.ems-theme-green {
+  // for some reason this color is not applied in the theme
+  // box in the header
+  background-color: $emsSecondaryBodyBackGroundColor;
+}
+.ems-theme-selected {
+  border: 2px solid #0d6efd;
+}
+// media queries
+
+/* Small Computer screens */
+@media (max-width: 84em) {
+  .ems-header-body {
+    width: 99%;
+  }
+  .ems-header {
+    width: 100%;
+  }
+  .ems-body {
+    //width: 98%;
+    //padding-right: 2px;
+  }
+}
+
+/* Landscape Tablets */
+/* 1200px max width 1200/16 = 75em */
+@media (max-width: 75em) {
+  html {
+    /* 9px i.e. 9/16*100=56.25 */
+    font-size: 75%;
+  }
+
+  .ems-main-body-grid {
+    grid-template-columns: 1fr;
+    padding-left: 1rem;
+    gap: 0px 0px;
+  }
+
+  .ems-side-menu-body {
+    display: none;
+  }
+  .ems-body {
+    width: 98vw;
+  }
+}
+/* Tablets */
+/* 944px max width 944/16 = 59em */
+@media (max-width: 59em) {
+  html {
+    /* 8px i.e. 9/16*100=50 */
+    font-size: 50%;
+  }
+}
+/* Phones */
+/* 544px*/
+@media (max-width: 34em) {
+  .ems-employee-list-grid {
+    grid-template-columns: 1fr;
+  }
+  .ems-employee-card {
+    max-width: 56rem;
+  }
+}
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";

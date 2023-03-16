@@ -1,0 +1,14 @@
+<div class="row ems-header">
+  <div>Server Error</div>
+</div>
+<div class="row ems-body" appTheme>
+  <h1 class="ac-server-error-header tertiary">
+    Internal Server Error : - refreshing the page will make the exception
+    disapper
+  </h1>
+  <ng-container *ngIf="error">
+    <p class="ac-error-message">Error: {{ error.title }}</p>
+    <p class="ac-error-details-header">Error Details:</p>
+    <code class="ac-error-details">{{ error.detail }}</code>
+  </ng-container>
+</div>

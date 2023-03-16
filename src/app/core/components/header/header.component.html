@@ -1,0 +1,177 @@
+<div class="ems-header-body" appTheme>
+  <ng-container *ngIf="currentUser$ | async as user">
+    <div class="d-flex align-items-center justify-content-between">
+      <ng-container *ngIf="serverConfig$ | async as serverConfig">
+        <div>
+          <img
+            src="{{ serverConfig.apiUrl + serverConfig.logoPath }}"
+            class="img-fluid rounded-start"
+          />
+        </div>
+      </ng-container>
+
+      <div>
+        <ng-container *ngIf="user.isAdmin">
+          <header class="d-flex justify-content-center py-3">
+            <ul class="nav nav-pills">
+              <li class="nav-item">
+                <a
+                  routerLink="/main/home"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  class="nav-link"
+                  aria-current="page"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  routerLink="/main/employees"
+                  routerLinkActive="active"
+                  class="nav-link"
+                  >Employees</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  routerLink="/main/departments"
+                  routerLinkActive="active"
+                  class="nav-link"
+                  >Departments</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  routerLink="/main/designations"
+                  routerLinkActive="active"
+                  class="nav-link"
+                  >Designations</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  routerLink="/main/reports"
+                  routerLinkActive="active"
+                  class="nav-link"
+                  >Reports</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  routerLink="/main/logs"
+                  routerLinkActive="active"
+                  class="nav-link"
+                  >Logs</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  routerLink="/main/about"
+                  routerLinkActive="active"
+                  class="nav-link"
+                  >About</a
+                >
+              </li>
+            </ul>
+          </header>
+        </ng-container>
+        <ng-container *ngIf="!user.isAdmin">
+          <header class="d-flex justify-content-center py-3">
+            <ul class="nav nav-pills">
+              <li class="nav-item">
+                <a
+                  routerLink="/main/home"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  class="nav-link"
+                  aria-current="page"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  routerLink="/main/vacations"
+                  routerLinkActive="active"
+                  class="nav-link"
+                  >Vacation</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  routerLink="/main/salary"
+                  routerLinkActive="active"
+                  class="nav-link"
+                  >Salary</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a
+                  routerLink="/main/about"
+                  routerLinkActive="active"
+                  class="nav-link"
+                  >About</a
+                >
+              </li>
+            </ul>
+          </header>
+        </ng-container>
+      </div>
+      <div>
+        <div class="d-flex gap-2">
+          <div
+            style="background-color: #d9e0e6"
+            (click)="setTheme('grey')"
+            [ngClass]="
+              selectedColorTheme == 'grey'
+                ? 'ems-theme-selected'
+                : 'ems-theme-grey'
+            "
+          ></div>
+          <div
+            style="background-color: #baccdc"
+            (click)="setTheme('blue')"
+            [ngClass]="
+              selectedColorTheme == 'blue'
+                ? 'ems-theme-selected'
+                : 'ems-theme-blue'
+            "
+          ></div>
+        </div>
+      </div>
+      <div>
+        <div class="d-flex gap-2">
+          <div style="cursor: pointer" (click)="setFontTheme('normal')">A</div>
+          <div style="cursor: pointer" (click)="setFontTheme('bigger')">A+</div>
+        </div>
+      </div>
+      <div>
+        <div class="dropdown">
+          <a
+            class="dropdown-toggle"
+            style="cursor: pointer"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <strong>Welcome {{ user.displayName }}</strong>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a routerLink="/main/profile" class="dropdown-item"
+                ><i class="fa fa-solid fa-user ems-profile-icon"></i> View
+                Profile</a
+              >
+            </li>
+
+            <div class="dropdown-divider"></div>
+            <li>
+              <a (click)="logout()" class="dropdown-item" href="#">
+                <i class="fa fa-sign-out ems-profile-icon"></i> Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

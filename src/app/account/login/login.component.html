@@ -1,0 +1,53 @@
+<div
+  class="d-flex flex-column align-items-center justify-content-center ems-main-div-height"
+>
+  <div class="col-3 ems-login-form-header">
+    <div class="text-center">
+      <h4 class="font-weight-normal">Login</h4>
+    </div>
+  </div>
+  <div class="col-3 ems-login-form-div">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <app-text-input
+        formControlName="email"
+        [label]="'Email address'"
+      ></app-text-input>
+      <app-text-input
+        formControlName="password"
+        [label]="'Password'"
+        [type]="'password'"
+      ></app-text-input>
+      <div class="d-flex mb-2">
+        <input
+          formControlName="rememberMe"
+          type="checkbox"
+          id="remme"
+          name="remme"
+          class="form-check-input"
+          #rememberme
+        />
+        <label for="remme">Remember me</label><br />
+      </div>
+      <div class="d-flex justify-content-between">
+        <div>
+          <button
+            [disabled]="
+              loginForm.invalid || (loginStatus$ | async) == 'logging in'
+            "
+            class="btn btn-primary"
+            type="submit"
+          >
+            Sign in
+            <i
+              *ngIf="(loginStatus$ | async) == 'logging in'"
+              class="fa fa-spinner fa-spin"
+            ></i>
+          </button>
+        </div>
+        <div>
+          <a href="" routerLink="/account/register">Register</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

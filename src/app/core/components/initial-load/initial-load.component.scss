@@ -1,0 +1,10 @@
+@import "../../../../variable.scss";
+.ems-initial-load-main-div {
+  height: 70vh;
+}
+.ems-initial-load-context-div {
+  background-color: $emsPrimaryThemeColor;
+}
+h3 {
+  color: $emsPageHeaderColor;
+}

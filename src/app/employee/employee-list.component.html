@@ -1,0 +1,40 @@
+<div class="row ems-header">
+  <div class="d-flex flex-row justify-content-between">
+    <div>Employee List</div>
+    <div>
+      <a href="#" routerLink="/main/employees/add" class="ems-a">Create</a>
+    </div>
+  </div>
+</div>
+<div class="row ems-body" appTheme>
+  <div class="mt-2 ems-content">
+    <ng-container *ngIf="vm$ | async as vm">
+      <div class="ems-employee-list-grid ems-grid-3-cols">
+        <ng-container *ngIf="vm.employees">
+          <ng-container
+            *ngFor="let item of vm.employees"
+            style="padding-left: 15px"
+          >
+            <app-employee-card [employee]="item"></app-employee-card>
+          </ng-container>
+        </ng-container>
+      </div>
+      <ng-container
+        *ngIf="
+          vm.loadingStatus === 'loading' || vm.loadingStatus === 'deleting'
+        "
+      >
+        <app-loading></app-loading>
+      </ng-container>
+      <div class="d-flex justify-content-center" *ngIf="vm.count > 0">
+        <app-pager
+          [pageSize]="vm.empParams.pageSize"
+          [totalCount]="vm.count"
+          [pageNumber]="vm.empParams.pageIndex"
+          (pageChanged)="onPageChanged($event)"
+        >
+        </app-pager>
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="form-label-group">
+  <input
+    [ngClass]="
+      controlDir?.control?.touched
+        ? !controlDir.control.valid
+          ? 'is-invalid'
+          : 'is-valid'
+        : null
+    "
+    [type]="type"
+    (input)="onChange($event.target.value)"
+    (blur)="onTouched()"
+    #input
+    class="form-control"
+    placeholder="{{ label }}"
+  />
+  <div
+    *ngIf="controlDir?.control?.status === 'PENDING'"
+    class="fa fa-spinner fa-spin loader"
+  ></div>
+  <!-- <label for="{{ label }}">{{ label }}</label> -->
+  <div
+    class="invalid-feedback"
+    *ngIf="!controlDir?.control?.valid && controlDir?.control?.touched"
+  >
+    <span *ngIf="controlDir.control.errors?.required"
+      >{{ label }} is required</span
+    >
+    <span *ngIf="controlDir.control.errors?.age"
+      >Invalid age. Input valid whole number between 20 to 80</span
+    >
+    <span *ngIf="controlDir.control.errors?.salary"
+      >Invalid Basic salary. Basic salary range allowed between 4000 to
+      10000</span
+    >
+    <span *ngIf="controlDir.control.errors?.percentage"
+      >Invalid Percentage. Percentage range allowed between 0 to 1</span
+    >
+    <span *ngIf="controlDir.control.errors?.maxlength"
+      >Maximum length allowed is
+      {{ controlDir.control.errors?.maxlength.requiredLength }}</span
+    >
+    <span *ngIf="controlDir.control.errors?.pattern"
+      >Invalid email address</span
+    >
+  </div>
+
+  <div
+    class="invalid-feedback d-block"
+    *ngIf="!controlDir?.control?.valid && controlDir?.control?.dirty"
+  >
+    <span *ngIf="controlDir.control.errors?.emailExists"
+      >Email address is in use</span
+    >
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="row ems-header">
+  <div class="d-flex flex-row justify-content-between">
+    <div>
+      <a>{{ this.pageTitle }}</a>
+    </div>
+    <div>
+      <a href="#" routerLink="/main/departments" class="ems-a"
+        >Department List</a
+      >
+    </div>
+  </div>
+</div>
+<div class="row ems-body" appTheme>
+  <div class="mt-2 ems-content">
+    <div class="row">
+      <form [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
+        <input type="text" formControlName="id" style="display: none" />
+        <input type="text" formControlName="companyId" style="display: none" />
+        <div class="row">
+          <div class="col">
+            <app-text-input
+              formControlName="name"
+              [label]="'Name'"
+            ></app-text-input>
+          </div>
+          <div class="col">
+            <app-text-input
+              formControlName="description"
+              [label]="'Description'"
+            ></app-text-input>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-auto">
+            <button
+              type="submit"
+              [disabled]="!departmentForm.valid"
+              class="btn btn-success btn-sm"
+            >
+              {{ departmentForm.value.id ? "Update" : "Create" }}
+            </button>
+          </div>
+          <div class="col-auto">
+            <button
+              type="button"
+              class="btn btn-danger btn-sm"
+              (click)="reset()"
+            >
+              Reset
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

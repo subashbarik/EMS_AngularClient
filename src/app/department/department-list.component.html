@@ -1,0 +1,60 @@
+<div class="row ems-header">
+  <div class="d-flex flex-row justify-content-between">
+    <div>Department List</div>
+    <div>
+      <a href="#" routerLink="/main/departments/add" class="ems-a">Create</a>
+    </div>
+  </div>
+</div>
+<div class="row ems-body" appTheme>
+  <div class="mt-2 ems-content">
+    <ng-container *ngIf="vm$ | async as vm">
+      <div *ngIf="vm.loadingStatus !== 'loading'; else loading">
+        <ng-container *ngIf="vm.departments">
+          <app-table [data]="vm.departments">
+            <ng-template #headers>
+              <td>Name</td>
+              <td>Description</td>
+              <td>Created Date</td>
+              <td>Updated Date</td>
+              <td></td>
+              <td></td>
+            </ng-template>
+            <ng-template #rows let-row>
+              <td>{{ row.name }}</td>
+              <td>{{ row.description }}</td>
+              <td>
+                {{ row.createdDate | date : serverAppConfig.uiDateTimeFormat }}
+              </td>
+              <td>
+                {{ row.updatedDate | date : serverAppConfig.uiDateTimeFormat }}
+              </td>
+              <td>
+                <a routerLink="/main/departments/update/{{ row.id }}">
+                  <i
+                    class="fa fa-pencil-square ems-edit-table-icon"
+                    aria-hidden="true"
+                  ></i>
+                </a>
+              </td>
+              <td>
+                <a>
+                  <i
+                    class="fa fa-trash ems-delete-table-icon"
+                    (click)="delete(row.id)"
+                    style="font-size: 1.5em; cursor: pointer"
+                  ></i>
+                </a>
+              </td>
+            </ng-template>
+          </app-table>
+        </ng-container>
+      </div>
+      <ng-template #loading>
+        <div class="ems-loading">
+          <h3>Loading please wait..</h3>
+        </div>
+      </ng-template>
+    </ng-container>
+  </div>
+</div>

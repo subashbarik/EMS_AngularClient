@@ -1,0 +1,481 @@
+<div class="row ems-header">
+  <div class="d-flex flex-row justify-content-between">
+    <div>
+      <a>{{ this.pageTitle }}</a>
+    </div>
+    <div>
+      <a href="#" routerLink="/main/employees" class="ems-a">Employee List</a>
+    </div>
+  </div>
+</div>
+<div class="row ems-body" appTheme>
+  <div class="mt-2 ems-content">
+    <ng-container *ngIf="vm$ | async as data">
+      <div class="row" *ngIf="data.loadingStatus !== 'loading'; else loading">
+        <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+          <input type="text" formControlName="id" style="display: none" />
+          <tabset #tabset>
+            <tab heading="Personal Details">
+              <div class="mt-0 ems-employee-tab">
+                <div class="p-2">
+                  <div class="row">
+                    <div class="col">
+                      <app-text-input
+                        formControlName="firstName"
+                        [label]="'First Name'"
+                      ></app-text-input>
+                    </div>
+                    <div class="col">
+                      <app-text-input
+                        formControlName="middleName"
+                        [label]="'Middle Name'"
+                      ></app-text-input>
+                    </div>
+                    <div class="col">
+                      <app-text-input
+                        formControlName="lastName"
+                        [label]="'Last Name'"
+                      ></app-text-input>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <app-text-input
+                        formControlName="dob"
+                        [label]="'Date of Birth'"
+                      ></app-text-input>
+                    </div>
+                    <div class="col">
+                      <app-text-input
+                        formControlName="age"
+                        [label]="'Age'"
+                      ></app-text-input>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <app-text-input
+                        formControlName="contactNo"
+                        [label]="'Contact Number'"
+                      ></app-text-input>
+                    </div>
+                    <div class="col">
+                      <select
+                        class="form-control"
+                        id="sex"
+                        formControlName="sex"
+                        [ngClass]="
+                          this.employeeForm.get('sex').touched
+                            ? !this.employeeForm.get('sex').valid
+                              ? 'is-invalid'
+                              : 'is-valid'
+                            : null
+                        "
+                      >
+                        <option value="null">Select Sex</option>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                        <option value="U">Unknown</option>
+                      </select>
+                      <div
+                        class="invalid-feedback"
+                        *ngIf="
+                          !this.employeeForm.get('sex').valid &&
+                          this.employeeForm.get('sex').touched
+                        "
+                      >
+                        <span
+                          *ngIf="this.employeeForm.get('sex').errors?.required"
+                          >Sex is required</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <app-text-input
+                        formControlName="description"
+                        [label]="'Description'"
+                      ></app-text-input>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab heading="Address Details">
+              <div class="mt-0" style="background-color: antiquewhite">
+                <div class="p-2">
+                  <div class="row">
+                    <div class="col">
+                      <app-text-input
+                        formControlName="address1"
+                        [label]="'Address 1'"
+                      ></app-text-input>
+                    </div>
+                    <div class="col">
+                      <app-text-input
+                        formControlName="address2"
+                        [label]="'Address 2'"
+                      ></app-text-input>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <app-text-input
+                        formControlName="city"
+                        [label]="'City'"
+                      ></app-text-input>
+                    </div>
+                    <div class="col">
+                      <app-text-input
+                        formControlName="state"
+                        [label]="'State'"
+                      ></app-text-input>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <select
+                        class="form-control"
+                        id="country"
+                        formControlName="country"
+                        [ngClass]="
+                          this.employeeForm.get('country').touched
+                            ? !this.employeeForm.get('country').valid
+                              ? 'is-invalid'
+                              : 'is-valid'
+                            : null
+                        "
+                      >
+                        <option [ngValue]="null">Select Country</option>
+                        <option>India</option>
+                      </select>
+                    </div>
+                    <div class="col">
+                      <app-text-input
+                        formControlName="zipCode"
+                        [label]="'Zip Code'"
+                      ></app-text-input>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab heading="Employment Details">
+              <div class="mt-0" style="background-color: antiquewhite">
+                <div class="p-2">
+                  <div class="row">
+                    <div class="col">
+                      <ng-container *ngIf="data.empFormPageData.departments">
+                        <select
+                          class="form-control"
+                          id="employeeTypeId"
+                          formControlName="employeeTypeId"
+                          [ngClass]="
+                            this.employeeForm.get('employeeTypeId').touched
+                              ? !this.employeeForm.get('employeeTypeId').valid
+                                ? 'is-invalid'
+                                : 'is-valid'
+                              : null
+                          "
+                        >
+                          <option [ngValue]="null">Select Type</option>
+                          <option
+                            *ngFor="
+                              let employeeType of data.empFormPageData
+                                .employeeTypes
+                            "
+                            [ngValue]="employeeType.id"
+                          >
+                            {{ employeeType.name }}
+                          </option>
+                        </select>
+                        <div
+                          class="invalid-feedback"
+                          *ngIf="
+                            !this.employeeForm.get('employeeTypeId').valid &&
+                            this.employeeForm.get('employeeTypeId').touched
+                          "
+                        >
+                          <span
+                            *ngIf="
+                              this.employeeForm.get('employeeTypeId').errors
+                                ?.required
+                            "
+                            >Type is required</span
+                          >
+                        </div>
+                      </ng-container>
+                    </div>
+                    <div class="col">
+                      <div class="col">
+                        <app-text-input
+                          formControlName="hireDate"
+                          [label]="'Hire Date'"
+                        ></app-text-input>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <app-text-input
+                        formControlName="basic"
+                        [label]="'Basic'"
+                      ></app-text-input>
+                    </div>
+                    <div class="col">
+                      <app-text-input
+                        formControlName="taPercentage"
+                        [label]="'TA Percentage'"
+                      ></app-text-input>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <app-text-input
+                        formControlName="daPercentage"
+                        [label]="'DA Percentage'"
+                      ></app-text-input>
+                    </div>
+                    <div class="col">
+                      <app-text-input
+                        formControlName="hraPercentage"
+                        [label]="'HRA Percentage'"
+                      ></app-text-input>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <ng-container *ngIf="data.empFormPageData.departments">
+                        <select
+                          class="form-control"
+                          id="departmentId"
+                          formControlName="departmentId"
+                          [ngClass]="
+                            this.employeeForm.get('departmentId').touched
+                              ? !this.employeeForm.get('departmentId').valid
+                                ? 'is-invalid'
+                                : 'is-valid'
+                              : null
+                          "
+                        >
+                          <option [ngValue]="null">Select department</option>
+                          <option
+                            *ngFor="
+                              let department of data.empFormPageData.departments
+                            "
+                            [ngValue]="department.id"
+                          >
+                            {{ department.name }}
+                          </option>
+                        </select>
+                        <div
+                          class="invalid-feedback"
+                          *ngIf="
+                            !this.employeeForm.get('departmentId').valid &&
+                            this.employeeForm.get('departmentId').touched
+                          "
+                        >
+                          <span
+                            *ngIf="
+                              this.employeeForm.get('departmentId').errors
+                                ?.required
+                            "
+                            >Department is required</span
+                          >
+                        </div>
+                      </ng-container>
+                    </div>
+                    <div class="col">
+                      <ng-container *ngIf="data.empFormPageData.designations">
+                        <select
+                          class="form-control"
+                          id="designationId"
+                          formControlName="designationId"
+                          [ngClass]="
+                            this.employeeForm.get('designationId').touched
+                              ? !this.employeeForm.get('designationId').valid
+                                ? 'is-invalid'
+                                : 'is-valid'
+                              : null
+                          "
+                        >
+                          <option [ngValue]="null">Select designation</option>
+                          <option
+                            *ngFor="
+                              let designation of data.empFormPageData
+                                .designations
+                            "
+                            [ngValue]="designation.id"
+                          >
+                            {{ designation.name }}
+                          </option>
+                        </select>
+                        <div
+                          class="invalid-feedback"
+                          *ngIf="
+                            !this.employeeForm.get('designationId').valid &&
+                            this.employeeForm.get('designationId').touched
+                          "
+                        >
+                          <span
+                            *ngIf="
+                              this.employeeForm.get('designationId').errors
+                                ?.required
+                            "
+                            >Designation is required</span
+                          >
+                        </div>
+
+                        <!-- <app-select-input
+                        formControlName="designationId"
+                        [dataList]="vm.designations"
+                        [firstOptionText]="'Select a designation'"
+                        [label]="'Designation'"
+                      ></app-select-input> -->
+                      </ng-container>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <ng-container *ngIf="data.empFormPageData.empTypes">
+                          <select
+                            class="form-control"
+                            formControlName="employeeTypeId"
+                            [ngClass]="
+                              this.employeeForm.get('employeeTypeId').touched
+                                ? !this.employeeForm.get('employeeTypeId').valid
+                                  ? 'is-invalid'
+                                  : 'is-valid'
+                                : null
+                            "
+                          >
+                            <option [ngValue]="null">
+                              Select Employee Type
+                            </option>
+                            <option
+                              *ngFor="
+                                let empType of data.empFormPageData.empTypes
+                              "
+                              [ngValue]="empType.id"
+                            >
+                              {{ empType.name }}
+                            </option>
+                          </select>
+                          <div
+                            class="invalid-feedback"
+                            *ngIf="
+                              !this.employeeForm.get('employeeTypeId').valid &&
+                              this.employeeForm.get('employeeTypeId').touched
+                            "
+                          >
+                            <span
+                              *ngIf="
+                                this.employeeForm.get('employeeTypeId').errors
+                                  ?.required
+                              "
+                              >Designation is required</span
+                            >
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab heading="Employee Image">
+              <div class="mt-0" style="background-color: antiquewhite">
+                <div class="p-2">
+                  <div class="row">
+                    <div class="col">
+                      <label for="formFile">Image</label>
+                      <input
+                        class="form-control"
+                        accept="image/*"
+                        type="file"
+                        id="formFile"
+                        formControlName="imageUrl"
+                        (change)="selectFile($event)"
+                      />
+                      <span *ngIf="this.fileError" class="text-danger">{{
+                        this.fileError
+                      }}</span>
+                      <br />
+                      <span
+                        >Maxmimum allowed file size
+                        {{ this.serverAppConfig.maxImageSizeInKB }} KB.</span
+                      >
+                    </div>
+                    <div class="col">
+                      <ng-container *ngIf="this.mode === 'UPDATE'">
+                        <img
+                          height="50%"
+                          width="50%"
+                          src="{{
+                            this.localImagePath
+                              ? this.localImagePath
+                              : employee.imageUrl
+                          }}"
+                          class="img-fluid rounded-start"
+                          alt="{{ employee.firstName }} {{ employee.lastName }}"
+                          #imgUpdate
+                        />
+                        <button
+                          type="button"
+                          class="btn btn-danger btn-sm"
+                          [disabled]="
+                            imgUpdate.src ===
+                            data.empFormPageData.defaultImageUrl
+                          "
+                          (click)="clearImage()"
+                        >
+                          Remove
+                        </button>
+                      </ng-container>
+                      <ng-container *ngIf="this.mode === 'ADD'">
+                        <img
+                          height="40%"
+                          width="40%"
+                          src="{{
+                            this.localImagePath
+                              ? this.localImagePath
+                              : data.empFormPageData.defaultImageUrl
+                          }}"
+                          class="img-fluid rounded-start"
+                        />
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+
+          <div class="row mt-3">
+            <div class="col-auto">
+              <button
+                type="submit"
+                [disabled]="!employeeForm.valid"
+                class="btn btn-success btn-sm"
+              >
+                {{ employeeForm.value.id ? "Update" : "Create" }}
+              </button>
+            </div>
+            <div class="col-auto">
+              <button
+                type="button"
+                class="btn btn-danger btn-sm"
+                (click)="reset()"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <ng-template #loading>
+        <h3>Loading please wait..</h3>
+      </ng-template>
+    </ng-container>
+  </div>
+</div>

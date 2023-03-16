@@ -1,0 +1,37 @@
+<div class="form-label-group">
+  <select
+    [ngClass]="
+      controlDir?.control?.touched
+        ? !controlDir.control.valid
+          ? 'is-invalid'
+          : 'is-valid'
+        : null
+    "
+    (change)="onChange($event.target.selectedValue)"
+    (blur)="onTouched()"
+    #input
+    class="form-control"
+  >
+    <option [ngValue]="null">{{ firstOptionText }}</option>
+    <option *ngFor="let data of dataList" [ngValue]="data.id">
+      {{ data.name }}
+    </option>
+  </select>
+  <div
+    *ngIf="controlDir?.control?.status === 'PENDING'"
+    class="fa fa-spinner fa-spin loader"
+  ></div>
+  <div
+    class="invalid-feedback"
+    *ngIf="!controlDir?.control?.valid && controlDir?.control?.touched"
+  >
+    <span *ngIf="controlDir.control.errors?.required"
+      >{{ label }} is required</span
+    >
+  </div>
+
+  <div
+    class="invalid-feedback d-block"
+    *ngIf="!controlDir?.control?.valid && controlDir?.control?.dirty"
+  ></div>
+</div>

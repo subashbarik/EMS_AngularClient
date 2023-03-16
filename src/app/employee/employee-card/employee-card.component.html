@@ -1,0 +1,52 @@
+<div class="card ems-employee-card" (click)="view(employee.id)">
+  <div class="row g-0">
+    <div class="col-md-2">
+      <img
+        src="{{ employee.imageUrl }}"
+        class="img-fluid rounded-start"
+        alt="{{ employee.firstName }} {{ employee.lastName }}"
+      />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ employee.firstName }}
+        </h5>
+        <p class="card-text">
+          {{
+            (employee.description ? employee.description : "")
+              | stringmaxlength : 80
+          }}
+        </p>
+        <p class="card-text">
+          <small class="text-muted">{{ employee.departmentName }}</small>
+        </p>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-3"></div>
+            <div class="col-3">
+              <button
+                class="btn btn-primary"
+                routerLink="/main/employees/details/{{ employee.id }}"
+              >
+                View
+              </button>
+            </div>
+            <div class="col-3">
+              <button
+                class="btn btn-primary"
+                routerLink="/main/employees/update/{{ employee.id }}"
+              >
+                Edit
+              </button>
+            </div>
+            <div class="col-3">
+              <button class="btn btn-danger" (click)="delete()">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

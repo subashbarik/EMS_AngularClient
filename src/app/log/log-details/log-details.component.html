@@ -1,0 +1,68 @@
+<div class="row ems-header">
+  <div class="d-flex flex-row justify-content-between">
+    <div>Log Details</div>
+    <div>
+      <a href="#" routerLink="/main/logs" class="ems-a">Log List</a>
+    </div>
+  </div>
+</div>
+<div class="row ems-body" appTheme>
+  <div class="mt-2 ems-content">
+    <ng-container *ngIf="log$ | async as log">
+      <div class="row">
+        <div class="col-12">
+          <div class="row p-1 ems-log-details-header">
+            <div class="col-1">Id</div>
+            <div class="col-5">{{ log.id }}</div>
+            <div class="col-1">Type</div>
+            <div class="col-5">{{ log.level }}</div>
+          </div>
+          <div class="row p-1 ems-log-details-header">
+            <div class="col-1">Time Stamp</div>
+            <div class="col-5">
+              {{ log.timeStamp | date : serverAppConfig.uiDateTimeFormat }}
+            </div>
+            <div class="col-1">Message</div>
+            <div class="col-5">{{ log.message | stringmaxlength : 200 }}</div>
+          </div>
+          <div class="row p-1">
+            <div class="col-1">Details</div>
+            <div class="col-11 mr-1 ems-log-details-errordetails">
+              {{ log.exception }}
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-1">Souce Context</div>
+            <div class="col-5">{{ log.properties.sourceContext }}</div>
+            <div class="col-1">Action ID</div>
+            <div class="col-5">{{ log.properties.actionId }}</div>
+          </div>
+          <div class="row p-1">
+            <div class="col-1">Action Name</div>
+            <div class="col-5">{{ log.properties.actionName }}</div>
+            <div class="col-1">Request ID</div>
+            <div class="col-5">{{ log.properties.requestId }}</div>
+          </div>
+          <div class="row p-1">
+            <div class="col-1">Request Path</div>
+            <div class="col-5">{{ log.properties.requestPath }}</div>
+            <div class="col-1">Connection ID</div>
+            <div class="col-5">{{ log.properties.connectionId }}</div>
+          </div>
+          <div class="row p-1">
+            <div class="col-1">User Id</div>
+            <div class="col-5">{{ log.properties.userId }}</div>
+            <div class="col-1">Machine Name</div>
+            <div class="col-5">{{ log.properties.machineName }}</div>
+          </div>
+          <div class="row p-1">
+            <div class="col-1">Process Id</div>
+            <div class="col-5">{{ log.properties.processId }}</div>
+            <div class="col-1">Thread Id</div>
+            <div class="col-5">{{ log.properties.threadId }}</div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

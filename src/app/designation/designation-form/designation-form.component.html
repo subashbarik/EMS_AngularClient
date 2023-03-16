@@ -1,0 +1,84 @@
+<div class="row ems-header">
+  <div class="d-flex flex-row justify-content-between">
+    <div>
+      <a>{{ this.pageTitle }}</a>
+    </div>
+    <div>
+      <a href="#" routerLink="/main/designations" class="ems-a"
+        >Designation List</a
+      >
+    </div>
+  </div>
+</div>
+<div class="row ems-body" appTheme>
+  <div class="mt-2 ems-content">
+    <div class="row">
+      <form [formGroup]="designationForm" (ngSubmit)="onSubmit()">
+        <input type="text" formControlName="id" style="display: none" />
+        <div class="row">
+          <div class="col">
+            <app-text-input
+              formControlName="name"
+              [label]="'Name'"
+            ></app-text-input>
+          </div>
+          <div class="col">
+            <app-text-input
+              formControlName="description"
+              [label]="'Description'"
+            ></app-text-input>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <app-text-input
+              formControlName="basic"
+              [label]="'Basic'"
+            ></app-text-input>
+          </div>
+          <div class="col">
+            <app-text-input
+              formControlName="taPercentage"
+              [label]="'TA%'"
+            ></app-text-input>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <app-text-input
+              formControlName="daPercentage"
+              [label]="'DA%'"
+            ></app-text-input>
+          </div>
+          <div class="col">
+            <app-text-input
+              formControlName="hraPercentage"
+              [label]="'HRA%'"
+            ></app-text-input>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-auto">
+            <button
+              type="submit"
+              [disabled]="!designationForm.valid"
+              class="btn btn-success btn-sm"
+            >
+              {{ designationForm.value.id ? "Update" : "Create" }}
+            </button>
+          </div>
+          <div class="col-auto">
+            <button
+              type="button"
+              class="btn btn-danger btn-sm"
+              (click)="reset()"
+            >
+              Reset
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

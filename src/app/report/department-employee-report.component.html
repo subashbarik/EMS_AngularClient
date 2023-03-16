@@ -1,0 +1,17 @@
+<div class="row ems-header">
+  <div>Report</div>
+</div>
+<div class="row ems-body" appTheme>
+  <div class="mt-2 d-flex justify-content-center ems-content">
+    <div>
+      <iframe
+        *ngIf="reportUrl"
+        [src]="reportUrl"
+        width="900px"
+        height="700px;"
+        allowfullscreen
+        style="background-color: white"
+      ></iframe>
+    </div>
+  </div>
+</div>

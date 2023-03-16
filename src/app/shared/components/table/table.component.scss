@@ -1,0 +1,41 @@
+@import "../../../../variable.scss";
+.ems-table {
+  width: 100%;
+  border: 1px solid $emsPrimaryThemeColor;
+  box-shadow: 0.1rem 0.1rem 0.2rem 0.2rem $emsShadowColor;
+  border-radius: $emsBorderRadius;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.ems-table-header {
+  background-color: $emsPrimaryThemeColor;
+  color: $emsPageHeaderColor;
+  font-weight: 500;
+  // border-radius: $emsBorderRadius;
+}
+tbody tr:hover {
+  background-color: $emsTableRowHoverColor;
+}
+.ems-table-tr {
+  background-color: $emsTableRowHoverColor;
+}
+
+/* top-left border-radius */
+table thead tr:first-child td:first-child {
+  border-top-left-radius: 1rem;
+}
+
+/* top-right border-radius */
+table thead tr:first-child td:last-child {
+  border-top-right-radius: 1rem;
+}
+
+/* bottom-left border-radius */
+table tr:last-child td:first-child {
+  border-bottom-left-radius: $emsBorderRadius;
+}
+
+/* bottom-right border-radius */
+table tr:last-child td:last-child {
+  border-bottom-right-radius: $emsBorderRadius;
+}

@@ -1,0 +1,54 @@
+<div class="row ems-header">
+  <div class="d-flex flex-row">
+    <div>Log List</div>
+  </div>
+</div>
+<div class="row ems-body" appTheme>
+  <div class="mt-2 ems-content">
+    <ng-container *ngIf="vm$ | async as vm">
+      <ng-container *ngIf="vm.logs">
+        <app-table [data]="vm.logs">
+          <ng-template #headers>
+            <td>Id</td>
+            <td>Time Stamp</td>
+            <td>Level</td>
+            <td>Message</td>
+            <td></td>
+          </ng-template>
+          <ng-template #rows let-row>
+            <td>{{ row.id }}</td>
+            <td>
+              {{ row.timeStamp | date : serverAppConfig.uiDateTimeFormat }}
+            </td>
+            <td>{{ row.level }}</td>
+            <td>{{ row.message | stringmaxlength : 80 }}</td>
+            <td>
+              <a routerLink="/main/logs/details/{{ row.id }}">
+                <i
+                  class="fa fa-thin fa-eye ems-edit-table-icon"
+                  aria-hidden="true"
+                ></i>
+              </a>
+            </td>
+          </ng-template>
+        </app-table>
+        <ng-container *ngIf="vm.loadingStatus === 'loading'">
+          <app-loading></app-loading>
+        </ng-container>
+      </ng-container>
+
+      <div
+        class="d-flex justify-content-center mt-2"
+        *ngIf="vm.count > vm.logParams.pageSize"
+      >
+        <app-pager
+          [pageSize]="vm.logParams.pageSize"
+          [totalCount]="vm.count"
+          [pageNumber]="vm.logParams.pageIndex"
+          (pageChanged)="onPageChanged($event)"
+        >
+        </app-pager>
+      </div>
+    </ng-container>
+  </div>
+</div>

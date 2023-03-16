@@ -1,0 +1,9 @@
+@import "../variable.scss";
+.ems-app-side-menu {
+  width: 15vw;
+}
+.ems-app-body-container {
+  background-color: $emsPrimaryBackGroundColor;
+  height: 75vh;
+  width: auto;
+}
