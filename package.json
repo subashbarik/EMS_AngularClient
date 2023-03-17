@@ -14,7 +14,7 @@
     "start:prod": "http-server ./dist/client -p 4200",
     "build-and-deploy:prod": "run-s build:prod start:prod",
     "e2e": "start-server-and-test build-and-deploy:prod http://localhost:4200 cypress:run",
-    "test-headless": "ng test --watch=false --browsers:ChromeHeadless --reporters=junit --code-coverage"
+    "test-headless": "ng test --watch=false --reporters=junit --code-coverage"
   },
   "private": true,
   "dependencies": {
