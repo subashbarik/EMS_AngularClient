@@ -1,0 +1,52 @@
+# Node.js with Angular
+# Build a Node.js project that uses Angular.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install -g @angular/cli
+    npm install
+    ng build --prod
+  displayName: 'npm install and build'
+  
+- task: Npm@1
+  displayName: Test
+  inputs:
+    command: custom
+    workingDir: 'EMS_ANGULARCLIENT'
+    verbose: false
+    customCommand: 'run test-headless'
+  continueOnError: true
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results $(Build.SourcesDirectory)/EMS_ANGULARCLIENT/projects/web-app/test_report/TESTS-*.xml'
+  inputs:
+    testResultsFiles: '$(Build.SourcesDirectory)/EMS_ANGULARCLIENT/projects/web-app/test_report/TESTS-*.xml'
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage from $(Build.SourcesDirectory)/EMS_ANGULARCLIENT/coverage/**/*cobertura-coverage.xml'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(Build.SourcesDirectory)/EMS_ANGULARCLIENT/coverage/**/*cobertura-coverage.xml'
+- task: Npm@1
+  displayName: Build
+  inputs:
+    command: custom
+    workingDir: 'EMS_ANGULARCLIENT'
+    verbose: false
+    customCommand: 'run build-dev'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: dist'
+  inputs:
+    PathtoPublish: 'EMS_ANGULARCLIENT\dist\web-app'
+    ArtifactName: dist
